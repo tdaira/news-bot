@@ -63,8 +63,9 @@ def get_important_article_id(client, headlines_json):
         },
     }
 
-    message = "Please choose 5 important topics from the following headlines. \
-        Please read the content carefully and decide its importance. \n```\n" + headlines_json + "\n```"
+    message = "5つの重要な記事を下記の一覧から選び出してください。\
+        抜き出した記事を読むのは日本で働くビジネスマンとし、重要度を判断してください。 \
+        また、contentをしっかり読んだ上で重要度を判断してください。 \n```\n" + headlines_json + "\n```"
     return get_function_calling_result(client, function, message)
 
 def get_summarized_article(client, title, content):
