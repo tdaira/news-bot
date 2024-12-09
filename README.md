@@ -21,14 +21,6 @@ python main.py
 ## Run in Cloud Run
 
 ```bash
-read NEWS_API_KEY # Enter your NewsAPI API key and press enter
-read OPENAI_API_KEY # Enter your OpenAI API key and press enter
-read SLACK_BOT_TOKEN # Enter your Slack Bot token and press enter
-read SLACK_CHANEL # Enter your Slack channel ID and press enter
-export NEWS_API_KEY=$NEWS_API_KEY
-export OPENAI_API_KEY=$OPENAI_API_KEY
-export SLACK_BOT_TOKEN=$SLACK_BOT_TOKEN
-export SLACK_CHANEL=$SLACK_CHANEL
 gcloud run jobs deploy news-bot-job \
     --source . \
     --tasks 1 \
