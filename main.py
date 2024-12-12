@@ -132,13 +132,17 @@ def main():
         article = filtered_headlines[article_id]
         print(f"Title: {article['title']}")
         print(f"URL: {article['url']}")
-        req = requests.get(article['url'])
+        req = None
+        try:
+            req = requests.get(article['url'], timeout=10)
+        except requests.exceptions.RequestException as e:
+            print(f"Request error: {e}")
+            continue
         full_article = simple_json_from_html_string(req.text, use_readability=True)
         if full_article['plain_content'] is None:
             continue
         summarized_article = get_summarized_article(client, article['title'], full_article['plain_content'])
         # Send message to Slack
-        print(article["urlToImage"])
         response = slack_client.chat_postMessage(
             channel=SLACK_CHANEL,
             text="><" + article['url'] + "|" + summarized_article['summarized_article']['title'] + ">\n" +
